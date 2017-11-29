@@ -1,0 +1,14 @@
+<div class="container--sidebar" self="top">
+    <div class="sidebar">
+        <div class="sidebar-title">
+            <h1>Continentes</h1>
+        </div>
+        <div id="filters">
+            <div class="filter-tab">
+                <li *ngFor="let link of links" class="sidebar-link" (click)="filterContinent(link.route)">
+                    <a [ngClass]="link.route == continentFilter ? 'selected': ''">{{link.tag}}</a>
+                </li>
+            </div>
+        </div>
+    </div>
+</div>

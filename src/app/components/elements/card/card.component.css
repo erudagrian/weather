@@ -1,0 +1,407 @@
+.- {
+    width: 320px;
+    height: auto;
+    margin: 15px 0;
+}
+
+.card-hero {
+    padding: 0 20px 20px 20px;
+}
+
+.card-description {
+    margin-bottom: 20px;
+}
+
+.card-meta-container {
+    width: 280px;
+    z-index: 99;
+}
+
+.card--resource .card-hero {
+    height: 267px;
+}
+
+.card-body--video {
+    height: 392px;
+}
+
+.card-body--weather {
+    height: 392px;
+}
+
+.card-footer {
+    position: relative;
+    display: inline-block;
+    padding-top: 0px;
+}
+
+.card:hover {
+    box-shadow: 0 40px 40px rgba(0, 0, 0, .16);
+    transform: translate(0, -20px);
+    transition-delay: 0s !important;
+}
+
+.card {
+    display: inline-block;
+    position: relative;
+    width: 355px;
+    background-color: white;
+    vertical-align: top;
+    text-align: left;
+    height: 480px;
+    margin: 20px;
+    -webkit-box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.08);
+    white-space: normal;
+    -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -o-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    color: #4B4F56;
+}
+
+.card:hover {
+    -webkit-box-shadow: 0 40px 40px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 40px 40px rgba(0, 0, 0, 0.16);
+    -webkit-transform: translate(0, -20px);
+    -ms-transform: translate(0, -20px);
+    transform: translate(0, -20px);
+    -webkit-transition-delay: 0s !important;
+    -o-transition-delay: 0s !important;
+    transition-delay: 0s !important;
+}
+
+.card:hover::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 20px;
+}
+
+.card-hero {
+    background-color: white;
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    position: relative;
+    clear: both;
+    float: left;
+    overflow: auto;
+    width: 100%;
+    padding: 20px;
+}
+
+.card-image {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 140px;
+}
+
+.card-image--size-185 {
+    height: 140px;
+}
+
+.card-play {
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
+    position: absolute;
+    text-align: center;
+    height: 60px;
+    width: 60px;
+    opacity: .8;
+    -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -o-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    /*background-image: url(../img/play-button.svg);*/
+    background-size: 58px 58px;
+    background-repeat: no-repeat;
+}
+
+.card-body {
+    position: relative;
+    clear: both;
+    float: left;
+    width: 100%;
+    overflow: visible;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    z-index: 2;
+}
+
+.card-body--video {
+    /* height: 435px; */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), to(rgba(0, 0, 0, 0.5)));
+    background: -webkit-linear-gradient(top, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    background: -o-linear-gradient(top, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.card-body--weather {
+    height: 100%;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), to(rgba(0, 0, 0, 0.5)));
+    background: -webkit-linear-gradient(top, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    background: -o-linear-gradient(top, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.card-footer {
+    font-size: 11px;
+    text-transform: uppercase;
+    position: absolute;
+    padding-left: 20px;
+    padding-right: 20px;
+    bottom: 0px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mix>a {
+    display: inline-block;
+}
+
+.card--collection {
+    background-size: 100%;
+    background-position: center;
+    min-height: 380px;
+}
+
+.card--collection>.card-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.card--collection .card-title,
+.card--collection .card-type,
+.card--collection .card-tag {
+    color: #ffffff;
+}
+
+.card--collection .card-description {
+    color: #DDDFE2;
+}
+
+.card--collection .card-footer-wrapper {
+    border: none;
+}
+
+.card--resource .card-hero {
+    height: 296px;
+}
+
+.card--article .card-hero,
+.card--video .card-hero,
+.card--weather .card-hero {
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.card--resource .card-description {
+    -webkit-line-clamp: 3;
+}
+
+.card--video .card-description {
+    -webkit-line-clamp: 3;
+}
+
+.card--weather .card-description {
+    -webkit-line-clamp: 3;
+}
+
+.card-description--clamp-8 {
+    -webkit-line-clamp: 8;
+}
+
+.card-description--clamp-14 {
+    -webkit-line-clamp: 14;
+}
+
+.card-description--clamp-0 {
+    -webkit-line-clamp: 0;
+}
+
+.card-description--clamp-2 {
+    -webkit-line-clamp: 2;
+}
+
+.card-description--clamp-3 {
+    -webkit-line-clamp: 3;
+}
+
+.no-touch .card:hover .card-play {
+    opacity: 1;
+    opacity-transform: scale(1.25);
+}
+
+.card-circle--article {
+    display: inline-block;
+    line-height: 66px;
+    text-align: center;
+    width: 48px;
+    height: 48px;
+    background-size: 48px 48px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.card-circle {
+    height: 48px;
+    width: 48px;
+    border-radius: 100px;
+    background-color: white;
+    margin-bottom: 12px;
+}
+
+.card-meta-container {
+    display: inline-block;
+    bottom: 0px;
+    position: absolute;
+    padding-bottom: 17px;
+    width: 307px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 32px;
+    margin-top: 12px;
+    color: #1D2129;
+    z-index: 98;
+}
+
+.card-temperature {
+    font-size: 54px;
+    font-weight: 100;
+    line-height: 32px;
+    margin-bottom: 12px;
+    color: #FFF;
+    text-align: left;
+}
+
+.card-title--video {
+    color: white;
+}
+
+.card-title--weather {
+    color: white;
+}
+
+.card-article-preview {
+    color: #90949C !important;
+}
+
+.card-resource .card-circle {
+    display: none;
+}
+
+.card-circle--articleIfNoImage {
+    right: 24px;
+    top: 16px;
+}
+
+.no-touch .card:hover .card-circle--articleIfNoImage {
+    top: 10px;
+    right: 18px;
+}
+
+.no-touch .card:hover .is-notShownIfHover {
+    display: none !important;
+    -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -o-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.no-touch .card:hover .is-shownIfHover {
+    display: inline-block !important;
+    -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    -o-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+    transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.card .is-notShownIfHover {
+    display: inline-block !important;
+}
+
+.card .is-shownIfHover {
+    display: none !important;
+}
+
+.card-tag {
+    color: #90949C;
+    display: inline-block;
+}
+
+.card-medium {
+    display: inline-block;
+    width: 20px;
+    width-height: 46px;
+    /*width-background-image: url(../img/logo-medium.svg);*/
+    width-background-size: 20px 20px;
+    width-background-position: center;
+    width-background-repeat: no-repeat;
+}
+
+.card-link {
+    display: inline-block;
+    width: 20px;
+    width-height: 46px;
+    /*width-background-image: url(../img/external-link.svg);*/
+    width-background-size: 16px 16px;
+    width-background-position: center;
+    width-background-repeat: no-repeat;
+}
+
+.card-type {
+    margin-right: 20px;
+    display: inline-block;
+    color: #4B4F56;
+}
+
+p.card-tag,
+p.card-type {
+    font-size: 11px;
+    line-height: 18px;
+}
+
+.card-description {
+    display: block;
+    display: -webkit-box;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: left;
+    line-height: 32px;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    color: #4B4F56;
+}
+
+.card-description.card-description--video {
+    color: white;
+}
+
+.card-description.card-description--weather {
+    color: white;
+}
+
+.card-footer-wrapper {
+    height: 46px;
+    line-height: 46px;
+    border-top: 1px solid #E9EBEE;
+}
+
+.card-row-wrapper .card {
+    margin-right: 60px;
+}

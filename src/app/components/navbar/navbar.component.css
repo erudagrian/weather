@@ -1,0 +1,83 @@
+#nav {
+    -webkit-box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.98);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 9999;
+    padding: 0px 0px 0px 24px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+body #nav {
+    position: fixed;
+    height: 66px;
+    padding-top: 2px;
+}
+
+@supports (-webkit-backdrop-filter: none) {
+    #nav {
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+}
+
+#nav div.item,
+#nav div.logo {
+    line-height: 62px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#nav div.logo {
+    /*background-image: url("../img/logo-fb.svg");*/
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    color: #90949C;
+    float: left;
+    padding: 0 0 0 42px;
+    font-weight: 200;
+    font-size: 18px;
+}
+
+#nav div.logo:hover {
+    opacity: .7;
+}
+
+.nav-isNotVisIfMobile {
+    display: inline-block;
+}
+
+.nav-isVisIfMobile {
+    display: none;
+}
+
+#nav div.item {
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin: 0px 32px 0 0;
+    color: #90949C;
+    -webkit-user-select: none;
+}
+
+#nav div.item a {
+    font-weight: inherit;
+    display: block;
+}
+
+#nav div.item a:hover {
+    opacity: .7;
+}
+
+#nav div.item.current {
+    color: #4B4F56;
+    -webkit-box-shadow: 0px 2px #4080FF;
+    box-shadow: 0px 2px #4080FF;
+}
+
+#nav div.item.current:hover {
+    opacity: 1;
+}

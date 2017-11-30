@@ -1,6 +1,6 @@
 .floatingmenu {
     position: fixed;
-    background: #cd3e3d;
+    background: #4080FF;
     width: 4em;
     height: 4em;
     border-radius: 50%;
@@ -11,8 +11,15 @@
     bottom: 0px;
     right: 0px;
     cursor: pointer;
-    border: .5em solid #fdaead;
+    border: .5em solid #83aeff;
     z-index: 99;
+    -webkit-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.floatingmenu:hover {
+    color: #4080FF;
+    background: #FFF;
 }
 
 .floatingmenu:after {
@@ -26,23 +33,32 @@
     border-bottom: 0.2em solid #fff;
 }
 
+.floatingmenu:hover:after {
+    border-color: #4080FF;
+}
+
 .floatingmenu ul {
     list-style: none;
     padding: 0;
 }
 
 .floatingmenu li {
-    width: 5em;
-    height: 1.4em;
-    padding: 0.2em;
-    margin-top: 0.2em;
+    display: block;
+    width: 8em;
+    /*height: 1.4em;*/
+    padding: 0.5em;
+    /*margin-top: 0.2em;*/
     text-align: center;
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
     transition: all 1s;
-    background: #fdaead;
+    background: #83aeff;
     opacity: 0;
     z-index: -1;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 500;
+    color: #90949C;
 }
 
 .floatingmenu:hover li {
@@ -118,42 +134,45 @@
 }
 
 .floatingmenu li:hover {
-    background: #cd3e3d;
+    background: #4080FF;
     z-index: 10;
 }
 
 .floatingmenu li:nth-of-type(1) {
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
     position: absolute;
-    left: -1.2em;
-    top: -4.2em;
+    left: -2em;
+    top: -4em;
+    /*left: -1.2em;
+    top: -2.5em;*/
 }
 
 .floatingmenu li:nth-of-type(2) {
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
     position: absolute;
-    left: 2em;
-    top: -3em;
+    left: -6.3em;
+    /*top: -1em;*/
+    top: -2.3em;
 }
 
 .floatingmenu li:nth-of-type(3) {
     position: absolute;
-    left: 3.4em;
-    top: 0.3em;
+    left: -8em;
+    top: 2em;
 }
 
 .floatingmenu li:nth-of-type(4) {
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
     position: absolute;
-    left: 2em;
-    top: 3.7em;
+    left: -6.3em;
+    top: 6.5em;
 }
 
 .floatingmenu li:nth-of-type(5) {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
     position: absolute;
-    left: -1.2em;
-    top: 5em;
+    left: -2em;
+    top: 8.5em;
 }
 
 .hint {

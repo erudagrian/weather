@@ -1,13 +1,11 @@
 <div class="container">
     <div class="input-field col s12">
-        <input [(ngModel)]=query (keyup)="filter()" id="country" type="text" class="validate filter-input">
-        <label for="country">Country</label>
+        <label for="field">{{searchLabel}}</label>
+        <input [(ngModel)]=query (keyup)="filter()" id="field" type="text" class="validate filter-input">
     </div>
-    <div class="suggestions" *ngIf="filteredList.length > 0">
-        <ul>
-            <li *ngFor="let item of filteredList">
-                <a (click)="select(item)">{{item}}</a>
-            </li>
+    <div class="suggestions">
+        <ul *ngIf="filteredList.length > 0" class="filteredList">
+            <li *ngFor="let item of filteredList" (click)="select(item)">{{item.name}}</li>
         </ul>
     </div>
 </div>

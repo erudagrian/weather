@@ -1,0 +1,48 @@
+.filter-input {
+    border: none;
+    border-bottom: solid 1px #4080FF;
+    width: 100%;
+}
+
+.suggestions {
+    width: 100%;
+    min-height: 40vh;
+    overflow: hidden;
+}
+
+label {
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin: 0px 32px 0 0;
+    color: #90949C;
+}
+
+.filteredList {
+    border: solid 1px #4080FF;
+    border-radius: 4px;
+    margin-top: 1em;
+}
+
+.filteredList li {
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    border-bottom: solid 1px #90949C;
+    line-height: 1.5em;
+    margin: 0 1em;
+    padding: 1em;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #90949C;
+}
+
+p.filteredList li:last-of-type {
+    border: none;
+}
+
+.filteredList li:hover {
+    background: rgba(64, 131, 255, 0.3);
+    color: #FFF;
+}

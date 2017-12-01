@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/combineLatest';
+import * as firebase from 'firebase';
 
 import { City } from '../models/city.model';
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input} from '@angular/core';
 
 @Component({
   selector: 'app-autocomplete',
@@ -6,15 +6,28 @@ import { Component, OnInit, ElementRef } from '@angular/core';
   styleUrls: ['./autocomplete.component.css']
 })
 export class AutocompleteComponent implements OnInit {
-  public query = '';
-  public countries = [ 'Albania', 'Andorra', 'Armenia', 'Austria', 'Azerbaijan', 'Belarus',
-                      'Belgium', 'Bosnia & Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus',
-                      'Czech Republic', 'Denmark', 'Estonia', 'Finland', 'France', 'Georgia',
-                      'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland', 'Italy', 'Kosovo',
-                      'Latvia', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macedonia', 'Malta',
-                      'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 'Norway', 'Poland',
-                      'Portugal', 'Romania', 'Russia', 'San Marino', 'Serbia', 'Slovakia', 'Slovenia',
-                      'Spain', 'Sweden', 'Switzerland', 'Turkey', 'Ukraine', 'United Kingdom', 'Vatican City'];
+    @Input() searchLabel: String;
+    query = '';
+  data = [
+      {id: 'ab', name: 'Albania'},
+      {id: 'bg', name: 'Belgium'},
+      {id: 'cr', name: 'Croatia'},
+      {id: 'dn', name: 'Denmark'},
+      {id: 'fr', name: 'France'},
+      {id: 'gm', name: 'Germany'},
+      {id: 'hg', name: 'Hungary'},
+      {id: 'ic', name: 'Iceland'},
+      {id: 'kv', name: 'Kosovo'},
+      {id: 'lv', name: 'Latvia'},
+      {id: 'mc', name: 'Monaco'},
+      {id: 'nw', name: 'Norway'},
+      {id: 'pl', name: 'Poland'},
+      {id: 'rm', name: 'Romania'},
+      {id: 'sp', name: 'Spain'},
+      {id: 'tk', name: 'Turkey'},
+      {id: 'un', name: 'Ukraine'},
+      {id: 'vc', name: 'Vatican City'},
+  ];
   public filteredList = [];
   public elementRef;
 
@@ -23,12 +36,13 @@ export class AutocompleteComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    console.log(this.searchLabel);
+}
 
   filter() {
     if (this.query !== '') {
-        this.filteredList = this.countries.filter(function(el){
-            return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+        this.filteredList = this.data.filter(function(el){
+            return el.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
         }.bind(this));
     } else {
         this.filteredList = [];
@@ -36,8 +50,9 @@ export class AutocompleteComponent implements OnInit {
 }
 
   select(item) {
-    this.query = item;
+    this.query = item.name;
     this.filteredList = [];
+    console.log(item);
   }
 
   handleClick(event) {
@@ -47,10 +62,10 @@ export class AutocompleteComponent implements OnInit {
         if (clickedComponent === this.elementRef.nativeElement) {
             inside = true;
         }
-       clickedComponent = clickedComponent.parentNode;
+        clickedComponent = clickedComponent.parentNode;
     } while (clickedComponent);
-     if (!inside) {
-         this.filteredList = [];
-     }
- }
+        if (!inside) {
+            this.filteredList = [];
+        }
+    }
 }

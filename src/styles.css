@@ -382,6 +382,15 @@ a {
     color: white;
 }
 
+.button--inactive {
+    cursor: not-allowed;
+    color: #CCC;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
 .button--float {
     position: fixed;
     bottom: 30px;
@@ -400,6 +409,13 @@ a {
     color: #4080FF;
     -webkit-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.button--inactive:hover {
+    cursor: not-allowed;
+    color: #CCC;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 a.tooltip:hover {

@@ -1,1 +1,1 @@
-<app-autocomplete [searchLabel]="searchfieldLabel"></app-autocomplete>
+<app-autocomplete [searchLabel]="searchfieldLabel" [data]="citiesArray" (messageEvent)="saveCity($event)" (dataSearch)="getCities($event)"></app-autocomplete>

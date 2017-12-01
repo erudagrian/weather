@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -20,6 +21,8 @@ import { CitiesService } from './services/cities.service';
 import { YahooWeatherService } from './services/yahoo-weather.service';
 import { ModalComponent } from './components/elements/modal/modal.component';
 import { FloatingmenuComponent } from './components/elements/floatingmenu/floatingmenu.component';
+import { NewcityformComponent } from './components/pages/home/newcityform/newcityform.component';
+import { AutocompleteComponent } from './components/elements/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { FloatingmenuComponent } from './components/elements/floatingmenu/floati
     CardComponent,
     ModalComponent,
     FloatingmenuComponent,
+    NewcityformComponent,
+    AutocompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,7 @@ import { FloatingmenuComponent } from './components/elements/floatingmenu/floati
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
     AngularFirestoreModule,
     HttpModule,
+    FormsModule,
   ],
   providers: [
     CitiesService,

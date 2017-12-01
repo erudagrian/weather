@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { CitiesService } from '../../../services/cities.service';
 import { City } from '../../../models/city.model';
@@ -11,6 +11,13 @@ import { City } from '../../../models/city.model';
 export class HomeComponent implements OnInit {
 
   cities: City[];
+  isvisible: Boolean = false;
+
+  modalHeader = 'Agrega una ciudad';
+  modalBody = '';
+  modalFooter = '';
+
+  @Output() messageEvent = new EventEmitter<String>();
 
   constructor(private citiesService: CitiesService) { }
 
@@ -22,5 +29,13 @@ export class HomeComponent implements OnInit {
 
   deleteItem(event, city: City) {
     this.citiesService.deleteItem(city);
+  }
+
+  openModal() {
+    this.isvisible = true;
+  }
+
+  closeModal($event) {
+    this.isvisible = $event;
   }
 }

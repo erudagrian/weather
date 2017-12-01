@@ -382,6 +382,13 @@ a {
     color: white;
 }
 
+.button--float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 2rem;
+}
+
 .button--active:hover {
     background-color: #FFFFFF;
     color: #4080FF;

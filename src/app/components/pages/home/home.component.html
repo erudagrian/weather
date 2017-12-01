@@ -1,4 +1,6 @@
 <ul layout="rows top-left">
     <app-card *ngFor="let city of cities" [location]="city"></app-card>
 </ul>
-<app-floatingmenu></app-floatingmenu>
+<button class="button button--active button--float" (click)="openModal()">+</button>
+<app-modal (messageEvent)="closeModal($event)" [header]="modalHeader" [body]="modalBody" [footer]="modalFooter"></app-modal>
+<!-- app-modal *ngIf="isvisible" (messageEvent)="closeModal($event)"></app-modal -->

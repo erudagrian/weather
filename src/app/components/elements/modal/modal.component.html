@@ -2,15 +2,14 @@
     <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Modal Header</h2>
+            <span class="close" (click)="modalClose()">&times;</span>
+            <h1>{{header}}</h1>
         </div>
         <div class="modal-body">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
+            <app-newcityform></app-newcityform>
         </div>
         <div class="modal-footer">
-            <h3>Modal Footer</h3>
+            <h3>{{footer}}</h3>
         </div>
     </div>
 </div>

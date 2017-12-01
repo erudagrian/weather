@@ -92,8 +92,6 @@ export class CardComponent implements OnInit {
         this.daytime = 'afternoon';
       }
       this.description = this.cities.text;
-      console.log(this.hour);
-      console.log(this.weather);
     });
   }
 

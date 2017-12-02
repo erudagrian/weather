@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { City } from '../models/city.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
+import { Console } from '@angular/core/src/console';
 
 
 @Injectable()
@@ -15,7 +17,7 @@ export class YahooWeatherService {
   headers: Headers;
   options: RequestOptions;
   cities: City[];
-  stringSearch: String;
+  stringSearch: BehaviorSubject<string|null>;
 
   constructor(private http: Http) {
     this.headers = new Headers({
@@ -24,6 +26,25 @@ export class YahooWeatherService {
       'Accept': 'q=0.8;application/json;q=0.9'
     });
     this.options = new RequestOptions({ headers: this.headers });
+
+    /*this.stringSearch = new BehaviorSubject(null);
+    this.cities = Observable.combineLatest(
+      this.stringSearch
+    ).switchMap(([stringSearch]) =>
+      afs.collection<City>('cities', ref => {
+        let query: firebase.firestore.Query = ref;
+        if (continent) {
+          query = query.where('continent', '==', continent);
+        }
+        return query;
+      }).snapshotChanges().map(changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as City;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );*/
   }
 
   private extractData(res: Response) {
@@ -74,10 +95,33 @@ export class YahooWeatherService {
     // console.log(this.getApiUrl(this.searchtext));
   }
 
-  getCity() {
+  getCity(stringSearch: String) {
     const searchtext =
-      'select woeid, name, country.code, timezone.content from geo.places where text="' + this.stringSearch + '" and placetype = "7"';
-    return this.getResponse(searchtext);
+      'select woeid, name, country.code, timezone.content from geo.places where text="' + stringSearch + '" and placetype = "7"';
+    /*return this.http.get(this.getApiUrl(searchtext))
+      .map(this.extractData)
+      .map((jsonResponse: Response) => {
+        console.log('Response');
+        console.log(jsonResponse);
+        return (<any>response.json()).streams.map(stream => {
+          console.log(stream);
+          return new City ({response
+
+          });
+        });
+      });*/
+      this.getResponse(searchtext).subscribe(city => {
+        this.cities = city.query.results.place
+          .map((jsonResponse) => {
+            return new City ({
+              name: jsonResponse.name,
+              woeid: jsonResponse.woeid,
+              country_code: jsonResponse.country.code,
+              continent: jsonResponse.timezone.split('/')[0].toLowerCase()
+            });
+          });
+        });
+        return this.cities;
     /* this.getResponse(searchtext).subscribe(city => {
       this.cities = city.query.results.place.map( p => {
         const newCity: City = new City;

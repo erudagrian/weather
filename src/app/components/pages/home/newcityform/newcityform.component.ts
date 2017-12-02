@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { YahooWeatherService } from '../../../../services/yahoo-weather.service';
 import { City } from '../../../../models/city.model';
@@ -19,7 +20,7 @@ export class NewcityformComponent implements OnInit {
 
   ngOnInit() {
     this.citiesArray = [];
-    this.ywservice.getCity().subscribe(city => {
+    /*this.ywservice.getCity().subscribe(city => {
       this.citiesArray = city.query.results.place.map( p => {
         const newCity: City = new City;
         newCity.name = p.name;
@@ -28,7 +29,7 @@ export class NewcityformComponent implements OnInit {
         newCity.continent = p.timezone.split('/')[0].toLowerCase();
         return newCity;
       });
-    });
+    });*/
     /*this.citiesArray = [
       {id: 'ab', name: 'Albania'},
       {id: 'bg', name: 'Belgium'},
@@ -52,7 +53,7 @@ export class NewcityformComponent implements OnInit {
   }
 
   getCities($event) {
-    this.searchQuery = $event;
+    // this.searchQuery = $event;
     // this.ywservice.getCity('paris');
     /* this.ywservice.getCity('paris').subscribe(city => {
       this.citiesArray = city.query.results.place.map( p => {
@@ -65,7 +66,10 @@ export class NewcityformComponent implements OnInit {
       });
     }); */
     // this.citiesArray = this.ywservice.getCity('paris');
-    this.ywservice.setStringsearch('paris');
+    // this.ywservice.setStringsearch('paris');
+    console.log('Newcityform');
+    this.citiesArray = this.ywservice.getCity('paris');
+    console.log(this.citiesArray);
   }
 
   saveCity($event) {

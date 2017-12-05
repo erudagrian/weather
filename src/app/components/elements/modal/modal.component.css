@@ -26,7 +26,11 @@
 
 .modal-content {
     position: relative;
-    background-color: #fcfcfc;
+    /*background-color: #fcfcfc;
+    background-color: rgba(255, 255, 255, .9);
+    -webkit-backdrop-filter: blur(20px);
+    -moz-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);*/
     margin: auto;
     padding: 0;
     border: 1px solid #888;
@@ -87,11 +91,11 @@
 
 .modal-header {
     margin: 1em;
-    background-color: #FCFCFC;
+    background: none;
 }
 
 .modal-body {
-    padding: 2px 16px;
+    padding: 1em 16px;
 }
 
 .modal-footer {

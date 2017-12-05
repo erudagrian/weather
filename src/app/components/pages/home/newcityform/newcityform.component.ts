@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { YahooWeatherService } from '../../../../services/yahoo-weather.service';
+import { CitiesService } from '../../../../services/cities.service';
 import { City } from '../../../../models/city.model';
 
 @Component({
@@ -11,15 +12,16 @@ import { City } from '../../../../models/city.model';
 })
 export class NewcityformComponent implements OnInit {
 
+  @Output() messageEvent = new EventEmitter<Boolean>();
   searchfieldLabel = 'Ciudades';
   citiesArray: City[];
   selectedCity: City;
   searchQuery: String;
 
-  constructor(private ywservice: YahooWeatherService) { }
+  constructor(private ywservice: YahooWeatherService, private cs: CitiesService) { }
 
   ngOnInit() {
-    this.citiesArray = [];
+    // this.citiesArray = [];
     /*this.ywservice.getCity().subscribe(city => {
       this.citiesArray = city.query.results.place.map( p => {
         const newCity: City = new City;
@@ -30,26 +32,6 @@ export class NewcityformComponent implements OnInit {
         return newCity;
       });
     });*/
-    /*this.citiesArray = [
-      {id: 'ab', name: 'Albania'},
-      {id: 'bg', name: 'Belgium'},
-      {id: 'cr', name: 'Croatia'},
-      {id: 'dn', name: 'Denmark'},
-      {id: 'fr', name: 'France'},
-      {id: 'gm', name: 'Germany'},
-      {id: 'hg', name: 'Hungary'},
-      {id: 'ic', name: 'Iceland'},
-      {id: 'kv', name: 'Kosovo'},
-      {id: 'lv', name: 'Latvia'},
-      {id: 'mc', name: 'Monaco'},
-      {id: 'nw', name: 'Norway'},
-      {id: 'pl', name: 'Poland'},
-      {id: 'rm', name: 'Romania'},
-      {id: 'sp', name: 'Spain'},
-      {id: 'tk', name: 'Turkey'},
-      {id: 'un', name: 'Ukraine'},
-      {id: 'vc', name: 'Vatican City'},
-    ];*/
   }
 
   getCities($event) {
@@ -67,12 +49,16 @@ export class NewcityformComponent implements OnInit {
     }); */
     // this.citiesArray = this.ywservice.getCity('paris');
     // this.ywservice.setStringsearch('paris');
-    console.log('Newcityform');
-    this.citiesArray = this.ywservice.getCity('paris');
-    console.log(this.citiesArray);
+    // console.log('Newcityform');
+
+    this.citiesArray = this.ywservice.getCity($event);
+    // console.log(this.citiesArray);
   }
 
   saveCity($event) {
-    this.selectedCity = $event as City;
+    this.selectedCity = $event;
+    this.cs.addCity($event);
+    this.messageEvent.emit(false);
+    console.log(this.selectedCity);
   }
 }

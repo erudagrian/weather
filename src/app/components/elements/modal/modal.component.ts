@@ -19,4 +19,7 @@ export class ModalComponent implements OnInit {
     this.messageEvent.emit(false);
   }
 
+  closeModal($event) {
+    this.modalClose();
+  }
 }

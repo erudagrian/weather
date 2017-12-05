@@ -1,12 +1,12 @@
 <div id="myModal" class="modal">
     <!-- Modal content -->
-    <div class="modal-content">
+    <div class="modal-content blur">
         <div class="modal-header">
             <span class="close" (click)="modalClose()">&times;</span>
             <h1>{{header}}</h1>
         </div>
         <div class="modal-body">
-            <app-newcityform></app-newcityform>
+            <app-newcityform (messageEvent)="modalClose()"></app-newcityform>
         </div>
         <div class="modal-footer">
             <h3>{{footer}}</h3>

@@ -11,7 +11,7 @@
 
     <div class="suggestions">
         <ul *ngIf="filteredList.length > 0" class="filteredList">
-            <li *ngFor="let item of filteredList" (click)="select(item)">{{item.name}}</li>
+            <li *ngFor="let item of filteredList" (click)="select(item)">{{item.description}}</li>
         </ul>
     </div>
 </div>

@@ -58,7 +58,7 @@ import { YahooWeatherService } from '../../../services/yahoo-weather.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css', './card.weather.css']
+  styleUrls: ['./card.component.css', './weather.scss']
 })
 export class CardComponent implements OnInit {
 
@@ -73,7 +73,9 @@ export class CardComponent implements OnInit {
   daytime: String;
   description: String;
 
-  constructor(private ywservice: YahooWeatherService) { }
+
+  constructor(private ywservice: YahooWeatherService) {}
+
 
   ngOnInit() {
     this.sufix = 'weather';

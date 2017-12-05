@@ -16,7 +16,7 @@ export class YahooWeatherService {
   currentConditionsSearch = 'select item from weather.forecast where woeid in (select woeid from geo.places where text="paris")';
   headers: Headers;
   options: RequestOptions;
-  cities: City[];
+  cities: City[] = [];
   stringSearch: BehaviorSubject<string|null>;
 
   constructor(private http: Http) {
@@ -78,6 +78,7 @@ export class YahooWeatherService {
       .map(this.extractData)
       .subscribe(data => {
         this.cities = data.query.results.place.map( p => {
+          console.log(p);
           const newCity: City = new City;
           newCity.name = p.name;
           newCity.woeid = p.woeid;
@@ -93,6 +94,11 @@ export class YahooWeatherService {
     const searchtext = 'select * from weather.forecast where woeid in (' + woeid + ') and u = "c"';
     return this.getResponse(searchtext);
     // console.log(this.getApiUrl(this.searchtext));
+  }
+
+  async getCitiesSlowly(stringSearch: String): Promise<City[]> {
+    await new Promise<City[]>(resolve => setTimeout(resolve, 2000));
+    return await this.getCity(stringSearch);
   }
 
   getCity(stringSearch: String) {
@@ -111,18 +117,34 @@ export class YahooWeatherService {
         });
       });*/
       this.getResponse(searchtext).subscribe(city => {
-        this.cities = city.query.results.place
-          .map((jsonResponse) => {
-            return new City ({
-              name: jsonResponse.name,
-              woeid: jsonResponse.woeid,
-              country_code: jsonResponse.country.code,
-              continent: jsonResponse.timezone.split('/')[0].toLowerCase()
+        if (city.query.results) {
+          this.cities = city.query.results.place
+            .map((jsonResponse) => {
+              return new City ({
+                name: jsonResponse.name,
+                woeid: jsonResponse.woeid,
+                country_code: jsonResponse.country.code,
+                continent: jsonResponse.timezone.split('/')[0].toLowerCase(),
+                description: jsonResponse.name + ' ' + jsonResponse.country.code
+              });
             });
-          });
-        });
-        return this.cities;
-    /* this.getResponse(searchtext).subscribe(city => {
+        }
+      });
+      return this.cities;
+        /*return this.getResponse(searchtext).toPromise().then(city => {
+          this.cities = city.query.results.place
+            .map((jsonResponse) => {
+              return new City ({
+                name: jsonResponse.name,
+                woeid: jsonResponse.woeid,
+                country_code: jsonResponse.country.code,
+                continent: jsonResponse.timezone.split('/')[0].toLowerCase(),
+                description: jsonResponse.name + ' ' + jsonResponse.country.code
+              });
+            });
+          });*/
+          // return this.cities;
+   /* this.getResponse(searchtext).subscribe(city => {
       this.cities = city.query.results.place.map( p => {
         const newCity: City = new City;
         newCity.name = p.name;
@@ -133,7 +155,7 @@ export class YahooWeatherService {
       });
     });
     console.log('cities');
-    console.log(this.cities); */
+    console.log(this.cities);*/
     // return this.getPlainResponse(searchtext);
   }
 

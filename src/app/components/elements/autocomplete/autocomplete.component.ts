@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-autocomplete',
@@ -28,9 +29,14 @@ export class AutocompleteComponent implements OnInit {
         }
         if (this.query !== '') {
             this.dataSearch.emit(this.query);
-            this.filteredList = this.data.filter(function(el){
-                return el.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
-            }.bind(this));
+            if (this.data) {
+                this.filteredList = this.data;
+                /*this.filteredList = this.data.filter(function(el){
+                    return el.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+                }.bind(this));*/
+                // console.log('Data: ');
+                // console.log(this.filteredList);
+            }
         } else {
             this.filteredList = [];
         }
@@ -46,6 +52,7 @@ export class AutocompleteComponent implements OnInit {
     sendSelected() {
         if (this.selectedItem) {
             this.messageEvent.emit(this.selectedItem);
+            this.selectedItem = null;
         }
     }
 }

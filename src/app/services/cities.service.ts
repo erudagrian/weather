@@ -19,7 +19,7 @@ export class CitiesService {
 
   constructor(public afs: AngularFirestore) {
     this.continentFilter = new BehaviorSubject(null);
-    this.citiesCollection = this.afs.collection('cities');
+    this.citiesCollection = this.afs.collection<City>('cities');
     this.cities = Observable.combineLatest(
       this.continentFilter
     ).switchMap(([continent]) =>
@@ -51,8 +51,9 @@ export class CitiesService {
     return this.cities;
   }
 
-  addItem(city: City) {
-    this.citiesCollection.add(city);
+  addCity(city) {
+    this.afs.collection('cities').add(this.convertObject(city));
+    // this.citiesCollection.add(city);
   }
 
   updateItem(city: City) {
@@ -69,4 +70,12 @@ export class CitiesService {
     this.continentFilter.next(continent);
   }
 
+   convertObject(data) {
+      const obj = {};
+      Object.keys(data).forEach(function(key, index) {
+          console.log(key);
+          obj[key] = data[key];
+      });
+      return obj;
+  }
 }

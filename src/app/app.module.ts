@@ -23,6 +23,8 @@ import { ModalComponent } from './components/elements/modal/modal.component';
 import { FloatingmenuComponent } from './components/elements/floatingmenu/floatingmenu.component';
 import { NewcityformComponent } from './components/pages/home/newcityform/newcityform.component';
 import { AutocompleteComponent } from './components/elements/autocomplete/autocomplete.component';
+import { SunComponent } from './components/elements/card/weather/sun/sun.component';
+import { WeatherComponent } from './components/elements/card/weather/weather.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { AutocompleteComponent } from './components/elements/autocomplete/autoco
     FloatingmenuComponent,
     NewcityformComponent,
     AutocompleteComponent,
+    SunComponent,
+    WeatherComponent,
   ],
   imports: [
     BrowserModule,

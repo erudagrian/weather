@@ -36,14 +36,14 @@ export class WeatherComponent implements OnInit {
   lightningTimeout: any = null;
 
   sizes = {
-    container: {width: 0, height: 0},
-    card: {width: 0, height: 0}
+    container: {width: 0, height: 0, offset: null },
+    card: {width: 0, height: 0, offset: null }
   };
 
   clouds = [
-    {group: Snap.select('#cloud1')},
-    {group: Snap.select('#cloud2')},
-    {group: Snap.select('#cloud3')}
+    {group: Snap.select('#cloud1'), offset: null },
+    {group: Snap.select('#cloud2'), offset: null },
+    {group: Snap.select('#cloud3'), offset: null }
   ];
 
   // set weather types ☁️ 🌬 🌧 ⛈ ☀️

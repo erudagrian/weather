@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Power0, Power1, Power2, Power4, TweenMax, EasePack, Elastic } from 'gsap';
+import 'snapsvg-cjs';
 declare let Snap: any;
-declare let mina: any;    // if you want to use animations of course
+// declare let mina: any;    // if you want to use animations of course
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
+  @Input() currentWeather: any;
+  @ViewChild('container') container;
+  @ViewChild('card') card;
 
   innerSVG = Snap('#inner');
   outerSVG = Snap('#outer');
@@ -78,6 +83,8 @@ export class WeatherComponent implements OnInit {
       'clip-path': this.leafMask
     });
 
+    this.onResize();
+
     requestAnimationFrame(this.tick);
 
     // ☁️ draw clouds
@@ -91,6 +98,48 @@ export class WeatherComponent implements OnInit {
 
     TweenMax.set(this.sunburst.node, {opacity: 0});
     this.changeWeather(this.weather[0]);
+  }
+
+  onResize() {
+    // 📏 grab window and card sizes
+    this.sizes.container.width = this.container.width();
+    this.sizes.container.height = this.container.height();
+    this.sizes.card.width = this.card.width();
+    this.sizes.card.height = this.card.height();
+    this.sizes.card.offset = this.card.offset();
+
+    // 📐 update svg sizes
+
+    this.innerSVG.attr({
+      width: this.sizes.card.width,
+      height: this.sizes.card.height
+    });
+
+    this.outerSVG.attr({
+      width: this.sizes.container.width,
+      height: this.sizes.container.height
+    });
+
+    this.backSVG.attr({
+      width: this.sizes.container.width,
+      height: this.sizes.container.height
+    });
+
+    TweenMax.set(
+      this.sunburst.node,
+      {transformOrigin: '50% 50%', x: this.sizes.container.width / 2, y: (this.sizes.card.height / 2) + this.sizes.card.offset.top}
+    );
+    TweenMax.fromTo(this.sunburst.node, 20, {rotation: 0}, {rotation: 360, repeat: -1, ease: Power0.easeInOut});
+    // 🍃 The leaf mask is for the leafs that float out of the
+    // container, it is full window height and starts on the left
+    // inline with the card
+
+    this.leafMask.attr(
+      {
+        x: this.sizes.card.offset.left,
+        y: 0, width: this.sizes.container.width - this.sizes.card.offset.left,
+        height: this.sizes.container.height}
+      );
   }
 
   drawCloud(cloud, i) {
@@ -116,7 +165,7 @@ export class WeatherComponent implements OnInit {
     points.push([0, height].join(','));
     points.push('Q' + [width * -0.5, arch].join(','));
     points.push([-width, height].join(','));
-    points.push('Q' + [- (width * 2), height/2].join(','));
+    points.push('Q' + [- (width * 2), height / 2].join(','));
     points.push([-(width), 0].join(','));
 
     const path = points.join(' ');
@@ -138,7 +187,7 @@ export class WeatherComponent implements OnInit {
 
     // ⛈ line length is made longer for stormy weather
 
-    const lineLength = currentWeather.type === 'thunder' ? 35 : 14;
+    const lineLength = this.currentWeather.type === 'thunder' ? 35 : 14;
 
     // Start the drop at a random point at the top but leaving
     // a 20px margin
@@ -149,7 +198,7 @@ export class WeatherComponent implements OnInit {
 
     const line = this['innerRainHolder' + (3 - Math.floor(lineWidth))].path('M0,0 0,' + lineLength).attr({
       fill: 'none',
-      stroke: currentWeather.type === 'thunder' ? '#777' : '#0000ff',
+      stroke: this.currentWeather.type === 'thunder' ? '#777' : '#0000ff',
       strokeWidth: lineWidth
     });
 
@@ -158,19 +207,19 @@ export class WeatherComponent implements OnInit {
 
     this.rain.push(line);
 
-    // Start the falling animation, calls onRainEnd when the 
+    // Start the falling animation, calls onRainEnd when the
     // animation finishes.
 
     TweenMax.fromTo(
       line.node,
       1,
-      {x: x, y: 0- lineLength},
+      {x: x, y: 0 - lineLength},
       {
         delay: Math.random(),
         y: this.sizes.card.height,
         ease: Power2.easeIn,
         onComplete: this.onRainEnd,
-        onCompleteParams: [line, lineWidth, x, currentWeather.type]
+        onCompleteParams: [line, lineWidth, x, this.currentWeather.type]
       }
     );
   }
@@ -229,7 +278,7 @@ export class WeatherComponent implements OnInit {
     // Sets the end x position, and in turn defines the splash direction
     const randomX = ((Math.random() * splashDistance) - (splashDistance / 2));
 
-    // Now we put the 3 line coordinates into an array. 
+    // Now we put the 3 line coordinates into an array.
 
     const points = [];
     points.push('M' + 0 + ',' + 0);
@@ -244,7 +293,7 @@ export class WeatherComponent implements OnInit {
           strokeWidth: 1
       });
 
-    // We animate the dasharray to have the line travel along the path 
+    // We animate the dasharray to have the line travel along the path
 
     const pathLength = Snap.path.getTotalLength(splash);
     const xOffset = this.sizes.card.offset.left; // (sizes.container.width - sizes.card.width) / 2
@@ -262,7 +311,7 @@ export class WeatherComponent implements OnInit {
         opacity: 1,
         onComplete: this.onSplashComplete,
         onCompleteParams: [splash],
-        ease:  SlowMo.ease.config(0.4, 0.1, false)
+        ease: EasePack.SlowMo.ease.config(0.4, 0.1, false)
       }
     );
   }
@@ -349,7 +398,7 @@ export class WeatherComponent implements OnInit {
     const scale = 0.5 + (Math.random() * 0.5);
     let newSnow;
 
-    let x = 20 + (Math.random() * (sizes.card.width - 40));
+    let x = 20 + (Math.random() * (this.sizes.card.width - 40));
     const endX = 0; // = x - ((Math.random() * (areaX * 2)) - areaX)
     let y = -10;
     let endY;
@@ -445,7 +494,7 @@ export class WeatherComponent implements OnInit {
       }
     }
 
-    this.requestAnimationFrame(this.tick);
+    requestAnimationFrame(this.tick);
   }
 
   startLightningTimer() {
@@ -467,11 +516,11 @@ export class WeatherComponent implements OnInit {
     const points = [pathX + ',0'];
     for (let i = 0; i < steps; i++) {
       const x = pathX + (Math.random() * yOffset - (yOffset / 2));
-      const y = (this.sizes.card.height / steps) * (i + 1)
+      const y = (this.sizes.card.height / steps) * (i + 1);
       points.push(x + ',' + y);
     }
 
-    let strike = this.backSVGweatherContainer1.path('M' + points.join(' '))
+    let strike = this.backSVG.weatherContainer1.path('M' + points.join(' '))
     .attr({
       fill: 'none',
       stroke: 'white',

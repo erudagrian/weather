@@ -1,5 +1,7 @@
 <ul layout="rows top-left">
-    <app-card *ngFor="let city of cities" [location]="city"></app-card>
+    <li *ngFor="let city of cities" class="mix" style="display: inline-block;" data-bound="">
+        <app-card [location]="city"></app-card>
+    </li>
 </ul>
 <button class="button button--active button--float" (click)="openModal()">+</button>
 <app-modal *ngIf="isvisible" (messageEvent)="closeModal($event)" [header]="modalHeader" [body]="modalBody" [footer]="modalFooter"></app-modal>

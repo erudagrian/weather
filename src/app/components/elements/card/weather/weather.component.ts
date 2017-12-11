@@ -234,7 +234,7 @@ export class WeatherComponent implements OnInit {
 
     for (const i in this.rain) {
       if (!this.rain[i].paper) {
-        this.rain.splice(i, 1);
+        this.rain.splice(parseInt(i, 10), 1);
       }
     }
 
@@ -383,9 +383,9 @@ export class WeatherComponent implements OnInit {
     leaf.remove();
     leaf = null;
 
-    for (let i in this.leafs) {
+    for (const i in this.leafs) {
       if (!this.leafs[i].paper) {
-        this.leafs.splice(i, 1);
+        this.leafs.splice(parseInt(i, 10), 1);
       }
     }
 
@@ -451,7 +451,7 @@ export class WeatherComponent implements OnInit {
 
     for (const i in this.snow) {
       if (!this.snow[i].paper) {
-        this.snow.splice(i, 1);
+        this.snow.splice(parseInt(i, 10), 1);
       }
     }
 
@@ -477,7 +477,7 @@ export class WeatherComponent implements OnInit {
     }
 
     for (let i = 0; i < this.clouds.length; i++) {
-      if (this.currentWeather.type == 'sun') {
+      if (this.currentWeather.type === 'sun') {
         if (this.clouds[i].offset > -(this.sizes.card.width * 1.5)) {
           this.clouds[i].offset += this.settings.windSpeed / (i + 1);
         }

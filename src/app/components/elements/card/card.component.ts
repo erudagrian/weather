@@ -73,6 +73,7 @@ export class CardComponent implements OnInit {
   daytime: String;
   description: String;
 
+  currentWeather: { type: 'thunder' };
 
   constructor(private ywservice: YahooWeatherService) {}
 

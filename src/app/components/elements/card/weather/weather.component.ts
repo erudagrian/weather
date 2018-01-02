@@ -13,70 +13,103 @@ export class WeatherComponent implements OnInit {
   @ViewChild('container') container;
   @ViewChild('card') card;
 
-  innerSVG = Snap('#inner');
-  outerSVG = Snap('#outer');
-  backSVG = Snap('#back');
-  weatherContainer1 = Snap.select('#layer1');
-  weatherContainer2 = Snap.select('#layer2');
-  weatherContainer3 = Snap.select('#layer3');
-  innerRainHolder1 = this.weatherContainer1.group();
-  innerRainHolder2 = this.weatherContainer2.group();
-  innerRainHolder3 = this.weatherContainer3.group();
-  innerLeafHolder = this.weatherContainer1.group();
-  innerSnowHolder = this.weatherContainer1.group();
-  innerLightningHolder = this.weatherContainer1.group();
-  leafMask = this.outerSVG.rect();
-  leaf = Snap.select('#leaf');
-  sun = Snap.select('#sun');
-  sunburst = Snap.select('#sunburst');
-  outerSplashHolder = this.outerSVG.group();
-  outerLeafHolder = this.outerSVG.group();
-  outerSnowHolder = this.outerSVG.group();
+  innerSVG: any;
+  outerSVG: any;
+  backSVG: any;
+  weatherContainer1: any;
+  weatherContainer2: any;
+  weatherContainer3: any;
+  innerRainHolder1: any;
+  innerRainHolder2: any;
+  innerRainHolder3: any;
+  innerLeafHolder: any;
+  innerSnowHolder: any;
+  innerLightningHolder: any;
+  leafMask: any;
+  leaf: any;
+  sun: any;
+  sunburst: any;
+  outerSplashHolder: any;
+  outerLeafHolder: any;
+  outerSnowHolder: any;
 
-  lightningTimeout: any = null;
+  lightningTimeout: any;
+  sizes: any;
+  clouds: any[];
+  weather: any[];
 
-  sizes = {
-    container: {width: 0, height: 0, offset: null },
-    card: {width: 0, height: 0, offset: null }
-  };
+  settings: any;
 
-  clouds = [
-    {group: Snap.select('#cloud1'), offset: null },
-    {group: Snap.select('#cloud2'), offset: null },
-    {group: Snap.select('#cloud3'), offset: null }
-  ];
+  tickCount: number;
+  rain: any[];
+  leafs: any[];
+  snow: any[];
 
-  // set weather types ☁️ 🌬 🌧 ⛈ ☀️
+  constructor() {
+    this.innerSVG = Snap('#inner');
+    console.log(Snap('#inner'));
+    this.outerSVG = Snap('#outer');
+    this.backSVG = Snap('#back');
+    this.weatherContainer1 = Snap.select('#layer1');
+    this.weatherContainer2 = Snap.select('#layer2');
+    this.weatherContainer3 = Snap.select('#layer3');
+    this.innerRainHolder1 = this.weatherContainer1.group();
+    this.innerRainHolder2 = this.weatherContainer2.group();
+    this.innerRainHolder3 = this.weatherContainer3.group();
+    this.innerLeafHolder = this.weatherContainer1.group();
+    this.innerSnowHolder = this.weatherContainer1.group();
+    this.innerLightningHolder = this.weatherContainer1.group();
+    this.leafMask = this.outerSVG.rect();
+    this.leaf = Snap.select('#leaf');
+    this.sun = Snap.select('#sun');
+    this.sunburst = Snap.select('#sunburst');
+    this.outerSplashHolder = this.outerSVG.group();
+    this.outerLeafHolder = this.outerSVG.group();
+    this.outerSnowHolder = this.outerSVG.group();
 
-  weather = [
-    { type: 'snow', name: 'Snow'},
-    { type: 'wind', name: 'Windy'},
-    { type: 'rain', name: 'Rain'},
-    { type: 'thunder', name: 'Storms'},
-    { type: 'sun', name: 'Sunny'}
-  ];
+    this.lightningTimeout = null;
 
-  // 🛠 app settings
-  // in an object so the values can be animated in tweenmax
+    this.sizes = {
+      container: {width: 0, height: 0, offset: null },
+      card: {width: 0, height: 0, offset: null }
+    };
 
-  settings = {
-    windSpeed: 2,
-    rainCount: 0,
-    leafCount: 0,
-    snowCount: 0,
-    cloudHeight: 100,
-    cloudSpace: 30,
-    cloudArch: 50,
-    renewCheck: 10,
-    splashBounce: 80
-  };
+    this.clouds = [
+      {group: Snap.select('#cloud1'), offset: null },
+      {group: Snap.select('#cloud2'), offset: null },
+      {group: Snap.select('#cloud3'), offset: null }
+    ];
 
-  tickCount = 0;
-  rain = [];
-  leafs = [];
-  snow = [];
+    // set weather types ☁️ 🌬 🌧 ⛈ ☀️
 
-  constructor() { }
+    this.weather = [
+      { type: 'snow', name: 'Snow'},
+      { type: 'wind', name: 'Windy'},
+      { type: 'rain', name: 'Rain'},
+      { type: 'thunder', name: 'Storms'},
+      { type: 'sun', name: 'Sunny'}
+    ];
+
+    // 🛠 app settings
+    // in an object so the values can be animated in tweenmax
+
+    this.settings = {
+      windSpeed: 2,
+      rainCount: 0,
+      leafCount: 0,
+      snowCount: 0,
+      cloudHeight: 100,
+      cloudSpace: 30,
+      cloudArch: 50,
+      renewCheck: 10,
+      splashBounce: 80
+    };
+
+    this.tickCount = 0;
+    this.rain = [];
+    this.leafs = [];
+    this.snow = [];
+  }
 
   ngOnInit() {
     this.outerLeafHolder.attr({

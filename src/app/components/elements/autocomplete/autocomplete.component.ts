@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.css']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, OnChanges {
 
     @Input() searchLabel: String;
     @Input() data: any[];
@@ -21,6 +21,12 @@ export class AutocompleteComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    public ngOnChanges(simpleChanges: SimpleChanges): void {
+        if (simpleChanges.program$) {
+            const { currentValue: programData } = simpleChanges.filteredList;
+        }
+    }
 
     filter() {
         if (this.selectedItem) {

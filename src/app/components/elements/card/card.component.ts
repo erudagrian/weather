@@ -1,5 +1,5 @@
 /**
-  0 	tornado
+0 	tornado
 1 	tropical storm
 2 	hurricane
 3 	severe thunderstorms
@@ -58,7 +58,7 @@ import { YahooWeatherService } from '../../../services/yahoo-weather.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css', './weather.scss']
+  styleUrls: ['./card.component.css', './card.weather.scss']
 })
 export class CardComponent implements OnInit {
 
@@ -73,15 +73,27 @@ export class CardComponent implements OnInit {
   daytime: String;
   description: String;
 
+  // Weather switches
+  stormy = false;
+  tornado = false;
+  rainy = false;
+  snowy = false;
+  dusty = false;
+  foggy = false;
+  windy = false;
+  cloudy = false;
+  clear = false;
+  semi = 6;
+
   currentWeather: { type: 'thunder' };
 
   constructor(private ywservice: YahooWeatherService) {}
-
 
   ngOnInit() {
     this.sufix = 'weather';
     this.ywservice.getCurrentConditions(this.location.woeid).subscribe(city => {
       this.cities = city.query.results.channel.item.condition;
+      console.log(this.cities.code);
       this.weather = this.cities.code;
       this.temp = this.cities.temp + ' ºC';
       const date = new Date(this.cities.date.substring(0, this.cities.date.length - 4));
@@ -98,4 +110,27 @@ export class CardComponent implements OnInit {
     });
   }
 
+  setWeather(weatherCode: number) {
+    if (weatherCode in [0, 1, 2, 3, 4, 37, 38, 39, 45, 47]) {
+      this.stormy = true;
+    } else if (weatherCode in [0, 1, 2]) {
+      this.tornado = true;
+    } else if (weatherCode in [5, 6, 7, 8, 9, 10, 11, 12, 17, 18, 23, 35, 45, 46, 47]) {
+      this.rainy = true;
+    } else if (weatherCode in [5, 6, 7, 8, 13, 14, 15, 16, 41, 42, 43, 46]) {
+      this.snowy = true;
+    } else if (weatherCode in [19]) {
+      this.dusty = true;
+    } else if (weatherCode in [20, 21, 22]) {
+      this.foggy = true;
+    } else if (weatherCode in [23, 24, 25, 41, 43]) {
+      this.windy = true;
+    } else if (weatherCode in [25, 26, 27, 28, 29, 30, 44]) {
+      this.cloudy = true;
+    } else if (weatherCode in [31, 32, 33, 34, 36]) {
+      this.clear = true;
+    } else if (weatherCode in [29, 30, 37, 38, 39, 40, 42, 44, 47]) {
+      this.semi = 3;
+    }
+  }
 }

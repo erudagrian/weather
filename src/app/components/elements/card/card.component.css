@@ -275,6 +275,7 @@
     line-height: 32px;
     margin-top: 12px;
     color: #1D2129;
+    position: absolute;
     z-index: 98;
 }
 

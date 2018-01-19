@@ -21,35 +21,9 @@ export class NewcityformComponent implements OnInit {
   constructor(private ywservice: YahooWeatherService, private cs: CitiesService) { }
 
   ngOnInit() {
-    // this.citiesArray = [];
-    /*this.ywservice.getCity().subscribe(city => {
-      this.citiesArray = city.query.results.place.map( p => {
-        const newCity: City = new City;
-        newCity.name = p.name;
-        newCity.woeid = p.woeid;
-        newCity.country_code =  p.country.code;
-        newCity.continent = p.timezone.split('/')[0].toLowerCase();
-        return newCity;
-      });
-    });*/
   }
 
   getCities($event) {
-    // this.searchQuery = $event;
-    // this.ywservice.getCity('paris');
-    /* this.ywservice.getCity('paris').subscribe(city => {
-      this.citiesArray = city.query.results.place.map( p => {
-        const newCity: City = new City;
-        newCity.name = p.name;
-        newCity.woeid = p.woeid;
-        newCity.country_code =  p.country.code;
-        newCity.continent = p.timezone.split('/')[0].toLowerCase();
-        return newCity;
-      });
-    }); */
-    // this.citiesArray = this.ywservice.getCity('paris');
-    // this.ywservice.setStringsearch('paris');
-    // console.log('Newcityform');
     this.citiesArray = this.ywservice.getCity($event);
   }
 
@@ -57,6 +31,5 @@ export class NewcityformComponent implements OnInit {
     this.selectedCity = $event;
     this.cs.addCity($event);
     this.messageEvent.emit(false);
-    console.log(this.selectedCity);
   }
 }

@@ -58,7 +58,7 @@ import { YahooWeatherService } from '../../../services/yahoo-weather.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css', './card.weather.scss']
+  styleUrls: ['./card.component.scss', './card.weather.scss']
 })
 export class CardComponent implements OnInit {
 

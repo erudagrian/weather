@@ -1,10 +1,10 @@
 <div class="container">
     <div layout="row">
-        <div class="input-field" layout="column bottom-left" self="size-4of5">
+        <div class="input-field" layout="column bottom-left" self="size-3of5">
             <label for="field">{{searchLabel}}</label>
             <input [(ngModel)]=query (keyup)="filter()" id="field" type="text" class="validate filter-input">
         </div>
-        <div class="input-field" layout="column bottom-rigth" self="size-1of5">
+        <div class="input-field" layout="column bottom-rigth" self="size-2of5">
             <button class="button button--{{buttonClass}} button--small" (click)="sendSelected()">Agregar</button>
         </div>
     </div>

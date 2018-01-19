@@ -1,15 +1,9 @@
-.card {
-    width: 320px;
-    height: auto;
-    margin: 15px 0;
-}
-
 .card-hero {
     padding: 0 20px 20px 20px;
 }
 
 .card-description {
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 .card-meta-container {
@@ -130,9 +124,7 @@
     float: left;
     width: 100%;
     overflow: visible;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+    padding: 20px;
     z-index: 2;
 }
 
@@ -263,10 +255,8 @@
 
 .card-meta-container {
     display: inline-block;
-    bottom: 0px;
+    bottom: 5%;
     position: absolute;
-    padding-bottom: 17px;
-    width: 307px;
 }
 
 .card-title {
@@ -282,8 +272,6 @@
 .card-temperature {
     font-size: 54px;
     font-weight: 100;
-    line-height: 32px;
-    margin-bottom: 12px;
     color: #FFF;
     text-align: left;
 }
@@ -405,4 +393,11 @@ p.card-type {
 
 .card-row-wrapper .card {
     margin-right: 60px;
+}
+
+@media only screen and (max-width: 500px) {
+    .card {
+        width: 320px;
+        margin: 15px 0;
+    }
 }

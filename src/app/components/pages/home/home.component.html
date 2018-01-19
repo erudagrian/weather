@@ -1,4 +1,4 @@
-<ul layout="rows top-left">
+<ul layout="rows top-left" class="card-container">
     <app-card *ngFor="let city of cities" [location]="city"></app-card>
 </ul>
 <button class="button button--active button--float" (click)="openModal()">+</button>

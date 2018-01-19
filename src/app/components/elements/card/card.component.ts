@@ -49,21 +49,23 @@
 47 	isolated thundershowers
 3200 	not available
 */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { City } from '../../../models/city.model';
 import { Condition } from '../../../models/condition.model';
 import { YahooWeatherService } from '../../../services/yahoo-weather.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss', './card.weather.scss']
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
 
   @Input() location: City;
   sufix: string;
+  private _yahooSubscription: Subscription;
 
   cities: Condition;
   hour: number;
@@ -104,23 +106,27 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.sufix = 'weather';
-    this.ywservice.getCurrentConditions(this.location.woeid).subscribe(city => {
+    this._yahooSubscription = this.ywservice.getCurrentConditions(this.location.woeid).subscribe(city => {
       this.cities = city.query.results.channel.item.condition;
       this.weather = this.cities.code;
       this.temp = this.cities.temp + ' ºC';
       const date = new Date(this.cities.date.substring(0, this.cities.date.length - 4));
       this.hour = date.getHours();
-      // this.hour = 18;
-      if (this.hour < 16) {
+      // this.hour = 20;
+      if ( this.hour > 6 && this.hour < 16 ) {
         this.daytime = 'day';
-      } else if (this.hour > 20) {
-        this.daytime = 'night';
-      } else {
+      } else if ( this.hour > 16 && this.hour < 20 ) {
         this.daytime = 'afternoon';
+      } else {
+        this.daytime = 'night';
       }
       this.setWeather(this.cities.code.toString());
       this.description = this.cities.text;
     });
+  }
+
+  ngOnDestroy() {
+    this._yahooSubscription.unsubscribe();
   }
 
   setWeather(weatherCode: string) {

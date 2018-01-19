@@ -14,7 +14,7 @@ export class NewcityformComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<Boolean>();
   searchfieldLabel = 'Ciudades';
-  citiesArray: City[];
+  citiesArray: Observable<City[]>;
   selectedCity: City;
   searchQuery: String;
 
@@ -50,9 +50,7 @@ export class NewcityformComponent implements OnInit {
     // this.citiesArray = this.ywservice.getCity('paris');
     // this.ywservice.setStringsearch('paris');
     // console.log('Newcityform');
-
     this.citiesArray = this.ywservice.getCity($event);
-    // console.log(this.citiesArray);
   }
 
   saveCity($event) {

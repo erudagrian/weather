@@ -1,28 +1,38 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { City } from '../../../models/city.model';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, OnChanges {
 
-    @Input() searchLabel: String;
-    @Input() data: any[];
-    @Output() messageEvent = new EventEmitter<Boolean>();
-    @Output() dataSearch = new EventEmitter<String>();
+    @Input() public searchLabel: string;
+    @Input() public data: City[];
+    @Output() public messageEvent = new EventEmitter<City>();
+    @Output() public dataSearch = new EventEmitter<String>();
 
-    query = '';
-    filteredList = [];
-    elementRef;
-    selectedItem: any = null;
-    buttonClass: String = 'inactive';
-    constructor() {}
+    public query: string;
+    public filteredList: City[];
+    public selectedItem: City;
+    public buttonClass: string;
 
-    ngOnInit() {}
+    constructor() {
+        this.filteredList = [];
+        this.buttonClass = 'inactive';
+    }
 
-    filter() {
+    public ngOnInit() {}
+
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes.data.currentValue) {
+            this.filteredList = this.data;
+        }
+      }
+
+    public filter() {
         if (this.selectedItem) {
             this.selectedItem = null;
             this.buttonClass = 'inactive';
@@ -42,14 +52,14 @@ export class AutocompleteComponent implements OnInit {
         }
     }
 
-    select(item) {
+    public select(item) {
         this.buttonClass = 'active';
         this.query = item.name;
         this.selectedItem = item;
         this.filteredList = [];
     }
 
-    sendSelected() {
+    public sendSelected() {
         if (this.selectedItem) {
             this.messageEvent.emit(this.selectedItem);
             this.selectedItem = null;

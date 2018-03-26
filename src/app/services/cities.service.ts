@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { Query } from '@firebase/firestore-types';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/combineLatest';
@@ -24,11 +25,10 @@ export class CitiesService {
       this.continentFilter
     ).switchMap(([continent]) =>
       afs.collection<City>('cities', ref => {
-        let query: firebase.firestore.Query = ref;
         if (continent) {
-          query = query.where('continent', '==', continent);
+          return ref.where('continent', '==', continent);
         }
-        return query;
+        return ref;
       }).snapshotChanges().map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as City;

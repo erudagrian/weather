@@ -1,9 +1,10 @@
+
+import {throwError as observableThrowError } from 'rxjs/index';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { City } from '../models/city.model';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import { Console } from '@angular/core/src/console';
 
 //   woidSearch = 'select * from geo.places where text="sidney AU"';
 //   citySearch = 'select woeid, name, country.code, timezone.content from geo.places where text="paris" and placetype = "7"';
@@ -12,16 +13,14 @@ import { Console } from '@angular/core/src/console';
 @Injectable()
 export class YahooWeatherService {
 
-  private _headers: Headers;
-  private _options: RequestOptions;
+  private _headers: HttpHeaders;
 
-  constructor(private _http: Http) {
-    this._headers = new Headers({
+  constructor(private _http: HttpClient) {
+    this._headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'CORS': 'Access-Control-Allow-Origin',
       'Accept': 'q=0.8;application/json;q=0.9'
     });
-    this._options = new RequestOptions({ headers: this._headers });
   }
 
   private _handleError(error: any): Observable<any> {
@@ -29,7 +28,7 @@ export class YahooWeatherService {
         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     // this.toasterService.showToaster('error', 'Oops!! An error occurred', errMsg);
     // this.loaderService.displayLoader(false);
-    return Observable.throw(errMsg);
+    return observableThrowError(errMsg);
   }
 
   private _getApiUrl(query: string): string {
@@ -42,8 +41,8 @@ export class YahooWeatherService {
 
   private _getResponse(query: string): Observable<any> {
     return this._http
-      .get(this._getApiUrl(query))
-      .map(this._extractData);
+      .get(this._getApiUrl(query)).pipe(
+      map(this._extractData));
   }
 
   private _parseCity(yahooCity: any): City {
@@ -65,8 +64,8 @@ export class YahooWeatherService {
   public getCity(stringSearch: string): Observable<City[]> {
     const searchtext =
       'select woeid, name, country.code, timezone.content from geo.places where text="' + stringSearch + '" and placetype = "7"';
-    return this._getResponse(searchtext)
-      .map(city => {
+    return this._getResponse(searchtext).pipe(
+      map(city => {
         if (city.query.results) {
           const { place } = city.query.results;
           if (place.length) {
@@ -77,7 +76,7 @@ export class YahooWeatherService {
         } else {
           return [];
         }
-      });
+      }));
   }
 
   public getCurrentConditions(woeid: string): Observable<any> {

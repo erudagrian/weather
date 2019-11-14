@@ -1,12 +1,11 @@
+
+import {combineLatest as observableCombineLatest ,  BehaviorSubject ,  Observable } from 'rxjs/index';
+import { map, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
-import { Query } from '@firebase/firestore-types';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/combineLatest';
-import * as firebase from 'firebase';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
+
+
 
 import { City } from '../models/city.model';
 
@@ -21,22 +20,22 @@ export class CitiesService {
   constructor(public afs: AngularFirestore) {
     this.continentFilter = new BehaviorSubject(null);
     this.citiesCollection = this.afs.collection<City>('cities');
-    this.cities = Observable.combineLatest(
+    this.cities = observableCombineLatest(
       this.continentFilter
-    ).switchMap(([continent]) =>
+    ).pipe(switchMap(([continent]) =>
       afs.collection<City>('cities', ref => {
         if (continent) {
           return ref.where('continent', '==', continent);
         }
         return ref;
-      }).snapshotChanges().map(changes => {
+      }).snapshotChanges().pipe(map(changes => {
         return changes.map(a => {
           const data = a.payload.doc.data() as City;
           data.id = a.payload.doc.id;
           return data;
         });
-      })
-    );
+      }))
+    ));
     /* this.citiesCollection = this.afs.collection('cities', ref => ref.orderBy('name', 'asc'));
     this.cities = this.citiesCollection.snapshotChanges().map(changes => {
       return changes.map(a => {

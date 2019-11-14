@@ -54,7 +54,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { City } from '../../../models/city.model';
 import { Condition } from '../../../models/condition.model';
 import { YahooWeatherService } from '../../../services/yahoo-weather.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card',

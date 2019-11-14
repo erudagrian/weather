@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { YahooWeatherService } from '../../../../services/yahoo-weather.service';
 import { CitiesService } from '../../../../services/cities.service';

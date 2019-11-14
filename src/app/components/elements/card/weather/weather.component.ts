@@ -11,8 +11,8 @@ declare let Snap: any;
 export class WeatherComponent implements OnInit {
   @Input() currentWeather: any;
   @Input() location: any;
-  @ViewChild('container') container;
-  @ViewChild('card') card;
+  @ViewChild('container', { static: false }) container;
+  @ViewChild('card', { static: false }) card;
 
   constructor() { }
 

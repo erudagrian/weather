@@ -5,6 +5,10 @@
 
 export const environment = {
   production: false,
+  locationsApiKey: '',
+  weatherApiKey: '',
+  locationsUrl: 'https://dataservice.accuweather.com/locations/v1/cities/search',
+  weatherUrl: 'https://api.openweathermap.org/data/2.5/weather',
   firebase: {
     apiKey: '',
     authDomain: '',

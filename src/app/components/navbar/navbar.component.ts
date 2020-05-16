@@ -16,7 +16,7 @@ export class NavbarComponent {
         route: '',
       },
       {
-        tag: 'Info',
+        tag: 'About',
         route: '/about',
       },
     ];

@@ -25,6 +25,7 @@ import { NewcityformComponent } from './components/pages/home/newcityform/newcit
 import { AutocompleteComponent } from './components/elements/autocomplete/autocomplete.component';
 import { SunComponent } from './components/elements/card/weather/sun/sun.component';
 import { WeatherComponent } from './components/elements/card/weather/weather.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { WeatherComponent } from './components/elements/card/weather/weather.com
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     CitiesService,

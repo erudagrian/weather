@@ -1,5 +1,19 @@
-<ul layout="rows top-left" class="card-container">
-    <app-card *ngFor="let city of cities" [location]="city"></app-card>
+<ul
+    class="card-container"
+    layout="rows top-left">
+    <app-card
+        [location]="city"
+        [clock$]="clock"
+        *ngFor="let city of cities"></app-card>
 </ul>
-<button class="button button--active button--float" (click)="openModal()">+</button>
-<app-modal *ngIf="isvisible" (messageEvent)="closeModal($event)" [header]="modalHeader" [body]="modalBody" [footer]="modalFooter"></app-modal>
+
+<button
+    class="button button--active button--float"
+    (click)="openModal()">+</button>
+
+<app-modal
+    [header]="modalHeader"
+    [body]="modalBody"
+    [footer]="modalFooter"
+    (messageEvent)="closeModal($event)"
+    *ngIf="isvisible"></app-modal>

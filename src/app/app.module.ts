@@ -18,7 +18,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { CardComponent } from './components/elements/card/card.component';
 
 import { CitiesService } from './services/cities.service';
-import { YahooWeatherService } from './services/yahoo-weather.service';
+import { WeatherService } from './services/weather.service';
 import { ModalComponent } from './components/elements/modal/modal.component';
 import { FloatingmenuComponent } from './components/elements/floatingmenu/floatingmenu.component';
 import { NewcityformComponent } from './components/pages/home/newcityform/newcityform.component';
@@ -42,16 +42,16 @@ import { WeatherComponent } from './components/elements/card/weather/weather.com
     WeatherComponent,
   ],
   imports: [
-    BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase, 'angularfs'),
-    AngularFirestoreModule,
-    HttpClientModule,
+    BrowserModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [
     CitiesService,
-    YahooWeatherService
+    WeatherService
   ],
   bootstrap: [AppComponent]
 })

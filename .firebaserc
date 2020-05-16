@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "weather-app-israbaurel"
+  }
+  "targets": {
+    "weather-app-israbaurel": {
+      "hosting": {
+        "website": [
+          "weather-app-israbaurel"
+        ]
+      }
+    }
+  }
+}

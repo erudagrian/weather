@@ -1,35 +1,43 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { YahooWeatherService } from '../../../../services/yahoo-weather.service';
+import { WeatherService } from '../../../../services/weather.service';
 import { CitiesService } from '../../../../services/cities.service';
-import { City } from '../../../../models/city.model';
+import { City } from '../../../../interfaces/city.interface';
 
 @Component({
   selector: 'app-newcityform',
   templateUrl: './newcityform.component.html',
   styleUrls: ['./newcityform.component.css']
 })
-export class NewcityformComponent implements OnInit {
+export class NewcityformComponent {
 
   @Output() messageEvent = new EventEmitter<Boolean>();
-  searchfieldLabel = 'Ciudades';
-  citiesArray: Observable<City[]>;
-  selectedCity: City;
-  searchQuery: String;
+  public searchfieldLabel: string;
+  public citiesArray$: Observable<City[]>;
+  public selectedCity: City;
 
-  constructor(private ywservice: YahooWeatherService, private cs: CitiesService) { }
-
-  ngOnInit() {
+  constructor(
+    private _cs: CitiesService,
+    private _ws: WeatherService
+  ) {
+    this.searchfieldLabel = 'Ciudades';
   }
 
-  getCities($event) {
-    this.citiesArray = this.ywservice.getCity($event);
+  getCities(query: string): void {
+    if (typeof query === 'string' && query.length > 2) {
+      this.citiesArray$ = this._ws.getCity(query);
+      console.log('Cities Array', this.citiesArray$);
+    }
   }
 
-  saveCity($event) {
-    this.selectedCity = $event;
-    this.cs.addCity($event);
+  saveCity(city: City): void {
+    this.selectedCity = city;
+    this._cs.addCity(city);
     this.messageEvent.emit(false);
   }
 }

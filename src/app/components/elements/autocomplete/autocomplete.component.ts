@@ -1,13 +1,19 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs';
-import { City } from '../../../models/city.model';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges
+} from '@angular/core';
+import { City } from '../../../interfaces/city.interface';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
-export class AutocompleteComponent implements OnInit, OnChanges {
+export class AutocompleteComponent implements OnChanges {
 
     @Input() public searchLabel: string;
     @Input() public data: City[];
@@ -24,13 +30,11 @@ export class AutocompleteComponent implements OnInit, OnChanges {
         this.buttonClass = 'inactive';
     }
 
-    public ngOnInit() {}
-
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.data.currentValue) {
             this.filteredList = this.data;
         }
-      }
+    }
 
     public filter() {
         if (this.selectedItem) {
@@ -39,27 +43,28 @@ export class AutocompleteComponent implements OnInit, OnChanges {
         }
         if (this.query !== '') {
             this.dataSearch.emit(this.query);
-            if (this.data) {
-                this.filteredList = this.data;
+            // if (this.data) {
+            //     this.filteredList = this.data;
                 /*this.filteredList = this.data.filter(function(el){
                     return el.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
                 }.bind(this));*/
                 // console.log('Data: ');
                 // console.log(this.filteredList);
-            }
-        } else {
-            this.filteredList = [];
+            // }
         }
+        // else {
+        //     this.filteredList = [];
+        // }
     }
 
-    public select(item) {
+    public select(city: City): void {
         this.buttonClass = 'active';
-        this.query = item.name;
-        this.selectedItem = item;
+        this.query = `${city.LocalizedName} (${city?.Country?.LocalizedName})`;
+        this.selectedItem = city;
         this.filteredList = [];
     }
 
-    public sendSelected() {
+    public sendSelected(): void {
         if (this.selectedItem) {
             this.messageEvent.emit(this.selectedItem);
             this.selectedItem = null;

@@ -1,1 +1,5 @@
-<app-autocomplete [searchLabel]="searchfieldLabel" [data]="citiesArray | async" (messageEvent)="saveCity($event)" (dataSearch)="getCities($event)"></app-autocomplete>
+<app-autocomplete
+    [data]="citiesArray$ | async"
+    [searchLabel]="searchfieldLabel"
+    (dataSearch)="getCities($event)"
+    (messageEvent)="saveCity($event)"></app-autocomplete>

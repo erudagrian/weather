@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'region/:regionKey',
+    component: HomeComponent
   }
 ];
 

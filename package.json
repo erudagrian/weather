@@ -32,7 +32,7 @@
     "core-js": "^2.5.3",
     "firebase": "^7.14.3",
     "gsap": "^1.20.4",
-    "imports-loader": "^0.8.0",
+    "imports-loader": "^4.0.1",
     "jasmine": "^3.1.0",
     "rxjs": "^6.5.5",
     "snapsvg": "^0.5.1",
@@ -41,7 +41,7 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.5",
+    "@angular-devkit/build-angular": "~15.0.4",
     "@angular/cli": "^9.1.5",
     "@angular/compiler-cli": "^9.1.6",
     "@angular/language-service": "^9.1.6",

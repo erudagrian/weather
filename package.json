@@ -50,7 +50,7 @@
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^9.6.61",
     "@types/snapsvg": "^0.4.31",
-    "firebase-tools": "^9.23.3",
+    "firebase-tools": "^11.20.0",
     "jasmine-core": "^4.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.4.1",

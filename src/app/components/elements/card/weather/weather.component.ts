@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Power0, Power1, Power2, Power4, TweenMax, EasePack, Elastic } from 'gsap';
+// import { Power0, Power1, Power2, Power4, TweenMax, EasePack, Elastic } from 'gsap';
 import 'snapsvg-cjs';
 declare let Snap: any;
 
